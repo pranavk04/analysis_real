@@ -1,0 +1,114 @@
+\chapter{Sequences and Limits}
+\section{Sequences and Convergence}
+\begin{definition}
+A \vocab{sequence} is a function whose domain is $\mathbb{N}$. 
+\end{definition}
+\begin{definition}
+A sequence $\{a_n\}$ \vocab{converges} to $a \in \mathbb{R}$ if for every $\varepsilon > 0$, there exists an $N \in \mathbb{N}$ such that whenever $n > \mathbb{N}$, if follows that $|a_n - a| \leq \varepsilon$. We write $\lim a_n = a$, or simply $a_n \rightarrow a$. 
+\end{definition}
+The proof of a limit like this is very straightforward and formulaic. 
+\begin{example}
+Prove that $\lim \frac{1}{n} = 0$. 
+\end{example}
+\begin{proof}
+Let $\varepsilon >0$, and choose $N \geq \frac{1}{\varepsilon}$. Then if $n \geq N$, we have $|\frac{1}{n}-0| = |\frac{1}{n}| \leq \frac{1}{N} \leq \varepsilon$. Thus $\lim \frac{1}{n} - 0$. 
+\end{proof}
+When computing and proving a limit, we can drop terms in the inequality $|a_N - a| \leq \varepsilon$, because the \emph{inequality} must hold when calculating $N$. If we can find an expression greater than $|a_N - a|$ and prove it is less than $\varepsilon$ for some choice of $N$, then we can still proceed. This can be done by dropping certain terms, for example. 
+
+\begin{definition}
+A \vocab{divergent} sequence is one that does not converge. 
+\end{definition}
+
+\begin{definition}
+A sequence $\{b_n\}$ is bounded if there exists an $M > 0$ such that $|b_n| \leq M$ for all $n \in \mathbb{N}$. 
+\end{definition}
+
+\begin{theorem}
+Every convergent sequence is bounded. 
+\end{theorem}
+
+\section{Limit Theorems}
+\begin{theorem}[Squeeze Theorem]
+Let $\{a_n\}$ and $\{b_n\}$ both converge to an $L \in \mathbb{R}$. If $\{c_n\}$ is a sequence satisfying $\{a_n\} \leq \{c_n\} \leq \{b_n\}$ for all $n \in \mathbb{N}$, then $c_n \rightarrow L$. 
+\end{theorem}
+
+\begin{theorem}[Algebraic Limit Theorem]
+Suppose $a_n \rightarrow a$, $b_n \rightarrow b$, and $\kappa \in \mathbb{R}$. Then the following hold:
+\begin{enumerate}
+\item $\lim(a_n + b_n) = a+b$. 
+\item $\lim \kappa a_n = \kappa a$. 
+\item $\lim(a_nb_n) = ab$. 
+\item If $b, b_n \neq 0$, then $\lim \frac{a_n}{b_n} = \frac{a}{b}$. 
+\end{enumerate}
+\end{theorem}
+\newpage
+\begin{theorem}[Order Limit Theorem]
+Suppose $a_n \rightarrow a$ and $b_n \rightarrow b$. Then the following hold:
+\begin{enumerate}
+\item If $a_n \geq 0$ for all $n \in \mathbb{N}$, then $a \geq 0$. 
+\item If $a_n \leq b_n$ for all $n \in \mathbb{N}$, then $a \leq b$. 
+\item If there exists a $c \in \mathbb{R}$ for which $c \leq b_n$ for all $n \in \mathbb{N}$, then $c \leq b$. Similarly, if $a_n \leq c$ for all $n \in \mathbb{N}$, then $a \leq c$. 
+\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+let $\{a_n\}$ be a sequence. Define $\overline{s}_N = \sup{\{a_n | n \geq N\}}$ and $\underline{s}_N = \inf{\{a_n | n \geq N\}}$. The \vocab{limit superior} of $\{a_n\}$ is $$ \lim\sup a_n = \lim_{N \to \infty} \overline{s}_N,$$ and the \vocab{limit inferior} of $\{a_n\}$ is $$ \lim\inf a_n = \lim_{N \to \infty} \underline{s}_N.$$
+\end{definition}
+
+\begin{example}
+Let $a_n = 1 + \frac{1}{n}$. Find $\lim\sup a_n$ and $\lim\inf a_n$. 
+\end{example}
+\begin{soln}
+$$\lim\sup a_n = \lim_{N \to \infty} \sup{\{a_n | n \geq N\}} = \lim_{n\to\infty} \sup{\left\{1 + \frac{1}{N}, 1 + \frac{1}{N+1}, \cdots\right \}} = \lim_{N\to\infty}(1 + \frac{1}{N}) = \boxed{1}.$$ The infimum of the above set is 1, so $\lim\inf a_n = \boxed{1}$. 
+\end{soln}
+
+\begin{theorem}
+Let $a_n$ be a sequence. 
+\begin{enumerate}
+\item If $\lim\sup a_n$ is finite, then for any $\varepsilon > 0$ there exists an $N \in \mathbb{N}$ so that $a_n \leq \varepsilon + \lim\sup a_n$ for all $n \geq N$. 
+\item If $\lim\inf a_n$ is finite, then for any $\varepsilon > 0$ there exists an $N \in \mathbb{N}$ so that $a_n \geq \varepsilon + \lim\inf a_n$ for all $n \geq N$. 
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+A sequence $a_n$ converges to $a \in \mathbb{R}$ iff $\lim\sup a_n = a = \lim\inf a_n$. 
+\end{theorem}
+\section{Cauchy Sequences}
+\begin{definition}
+A sequence $a_n$ is a \vocab{Cauchy sequence} if, given any $\varepsilon > 0$, there exists $N \in \mathbb{N}$ so that $|a_n - a_m| \leq \varepsilon$ if $m \geq n \geq N$. 
+\end{definition}
+\begin{proposition*}
+If $a_n$ is Cauchy, then $a_n$ is bounded. 
+\end{proposition*}
+\begin{theorem}[Cauchy Criterion]
+Every convergence sequence $a_n$ in $\mathbb{R}$ is Cauchy. (and vice versa)
+\end{theorem}
+The forwards direction of this proof is easy. The backwards direction of this proof is more difficult, because the definition of a Cauchy sequence does not contain a limit. In order to prove this, we must introduce subseqences:
+\begin{definition}
+Let $a_n$ be a sequence of real numbers. Let $K \rightarrow n(k)$ be a not onto function from $\mathbb{N} \longrightarrow \mathbb{N}$ having the property that $n(k+1)>n(k)$ for all $k \in \mathbb{N}$. Then $\{a_{n(k)}\}_{k=1}^\infty$ is called a \vocab{subsequence} of $a_n$. 
+\end{definition}
+\begin{remark}
+A subsequence must be a sequence $\sim \mathbb{N}$. Note that subsequences must preserve order ($n(k+1) > n(k)$)
+\end{remark}
+\begin{theorem}[Monotone Subsequence Theorem]
+Every sequence has a subsequence which is monotone
+\end{theorem}
+Cauchy implying convergence does not happen in every domain. 
+\begin{definition}
+Met $M$ be a metric space. $M$ is \vocab{complete} if every Cauchy sequence in $M$ converges to a point $p \in M$. 
+\end{definition}
+$\mathbb{R}$ is complete, and this is called the Axiom of Completeness. 
+\begin{theorem}
+A set $E \subset \mathbb{R}$ is closed if every Cauchy sequence in $E$ converges to a point $p \in E$. 
+\end{theorem}
+\section{The Bolzano-Weierstrass Theorem}
+\begin{theorem}[Monotone Convergence Theorem]
+Every bounded monotone sequence converges. 
+\end{theorem}
+\begin{theorem}
+Let $a_n \rightarrow a$. THen every subsequence of $a_n$ also converges to $a$. 
+\end{theorem}
+We now arrive at the \vocab{Bolzano Weierstrass} theorem. 
+\begin{theorem}[Bolzano Weierstrass]
+Every bounded sequence has a convergent subsequence. 
+\end{theorem}

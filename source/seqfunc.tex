@@ -1,0 +1,287 @@
+\chapter{Sequences of Functions}
+
+\section{Introduction}
+This chapter deals with sequences of functions and their properties. 
+\begin{definition}
+	A \vocab{sequence of functions} on a set $E \subset \RR$ can be defined as 
+	\[ \{f_n(x)\} = \{f_1(x), f_2(x), \cdots \}. \]
+\end{definition}
+\section{Pointwise Convergence}
+
+\begin{definition}
+	For each $n \in \NN$, let $f_n$ be a function defined on a set $E \subset \RR$. The sequence $f_n$ of functions \vocab{converges pointwise} on $E$ to a \vocab{limiting function} $f: E \to \RR$ if, for all $x \in E$, the sequence of real numbers $f_n(x)$ converges to $f(x)$.
+\end{definition}
+
+Another way of looking at the above is that a sequence of functions converges pointwise if for all $f_n$, 
+\[ \lim_{n\to\infty} f_n(x) = f(x), \] for all $x \in E$. If for every $\varepsilon > 0$ and $x \in E$ we have a choice of $N \in \NN$ such that $|f_n(x) - f(x)| \leq \varepsilon$ whenever $n \geq N$, then we may establish that $\{f_n(x)\}$ converges to $f(x)$. Let's look at an example. 
+
+\begin{example}
+	Prove that \[ f_n(x) = \dfrac{x^2 + nx}{n} \] converges pointwise on $[0, \infty]$. 
+\end{example}
+\begin{proof}
+	Let $\varepsilon > 0$. Choose any $N \in \NN$ such that $N \geq \frac{1}{\varepsilon} \geq \frac{x^2}{\varepsilon}$. If $n \geq N$, we have 
+	\[ \left | \dfrac{x^2 + nx}{n} - x\dfrac{n}{n} \right | = \left | \dfrac{x^2}{n} \right | \leq \dfrac{x^2}{N} \leq \varepsilon. \]
+	Thus $f_n(x)$ converges pointwise on $[0,\infty]$ to $f(x) = x$. 
+\end{proof}
+
+If $f_n(x)$ converges to $f(x)$ pointwise on $E$, it is \emph{not} necessarily continuous, integrable, or differentiable. Note that even if $f_n(x)$ converges pointwise to $f(x)$ on $[a,b]$ and $f_n$, $f$ are all integrable, the following doesn't necessarily hold:
+\[ \int_a^b f(x) \diff x = \int_a^b \lim_{n\to\infty} f_n(x) \diff x = \lim_{n\to\infty} f_n(x) \diff x. \]
+
+\begin{example}
+	Consider the Weierstrass Function on $E = [-1,1]$ such that 
+	\[ f_n(x) = \sum_{k=0}^n \left (\dfrac{1}{2} \right)^k \cos{(3^k x)}. \]
+	Each $f_n$ is differentiable on $E$, but $f(x) = \lim f_n(x)$ is continuous and \emph{nowhere} differentiable. 
+\end{example}
+
+If $f_n(x) \to f(x)$ pointwise, and each $f_n(x)$ is a continuous function on $E$, then we can write
+\[ \lim_{x\to a} f_n(x) = f_n(a), \]
+\[ \lim_{n \to \infty} \lim_{x\to a} f_n(x) = \lim_{n\to\infty} f_n(a) = f(a). \]
+Note that the above does \emph{not} show continuity at $x = a$ for the limit function $f(x)$. However, if the above convergence is \emph{uuniform}, then we can swap the limits like so:
+\[ \lim_{x\to a} \lim_{x\to\infty} f_n(x) = f(a) \Longleftrightarrow \lim_{x\to a} f(x) = f(a), \] meaning $f$ \emph{is} continuous at $x = a$.
+\section{Uniform Convergence}
+
+\begin{definition}
+	A sequence of functions $f_n$ defined on $ E\subset \RR$ is \vocab{uniformly convergent} on $E$ to a limit function $f : E \to \RR$ if, for every $\varepsilon > 0$ there exists an $N \in \NN$ such that 
+	\[ |f_n(x) - f(x)| < \varepsilon \] for $n \geq N$ and $x \in E$. 
+\end{definition}
+
+Let's look at a quick example. 
+\begin{example}
+	Let \[ f_n(x) = \dfrac{1}{n(1+x^2)}. \] Prove that $f_n$ converges to 0 uniformly on $\RR$. 
+\end{example}
+\begin{proof}
+	Let $\varepsilon > 0$. Choose $N \in \NN$ such that $N \geq \frac{1}{\varepsilon}$. For any $n \geq N$, we have 
+	\[ \left | \dfrac{1}{n(1+x^2)} - 0 \right | = \dfrac{1}{n(1+x^2)} \leq \dfrac{1}{n} \leq \dfrac{1}{N} \leq \varepsilon. \]
+	Since $N$ is independent of $x$, $f_n$ converges to 0 uniformly on $\RR$. 
+\end{proof}
+
+For the next few propositions, assume that $f_n \to f$ and $g_n \to g$ are uniformly convergent sequences of functions on a set $E$. 
+\begin{proposition}
+	$f_n + g_n$ is a uniformly convergent sequence of functions. 
+\end{proposition}
+\begin{proof}
+	We claim that	$f_n + g_n$ converges uniformly to $f + g$. 
+	Given any $\varepsilon > 0$, there exists an $N_f$ such that for all $n \geq N_f$, $|f_n(x) - f(x)| \leq \frac{\varepsilon}{2}$. Similarly we have $N_g$. If $N = \max{N_f, N_g}$, then for all $n \geq N$, we have 
+	\[ |f_n(x) + g_n(x) - (f(x) + g(x))| \leq |f_n(x) - f(x)| + |g_n(x) - g(x)|\leq \varepsilon, \] for all $x \in E$. 
+\end{proof}
+
+While addition of sequences seems to hold, multiplication does \emph{not}, there are some extra conditions involved. 
+\begin{proposition}
+	$f_ng_n$ is uniformly convergent if there exists an $M > 0$ such that $|f_n| \leq M$ and $|g_n| \leq M$ for all $n \in \NN$. 
+\end{proposition}
+\begin{proof}
+	Let $\varepsilon > 0$. There exists an $N_f \in \NN$ such that $|f_n(x) - f(x)| \leq \frac{\varepsilon}{2M}$ when $n \geq N$. Similarly, we can define $N_g$. Let $N = \max{N_f, N_g}$. Then we have the following:
+	\[ |f_n(x)g_n(x) - f(x)g(x)| \leq |f_n(x)g_n(x) - f(x)g_n(x)| + |f(x)g_n(x) - f(x)g(x)| = \] \[ |f_n(x) - f(x)||g_n(x)| + |g_n(x) - g(x)||f(x)|  \leq \dfrac{\varepsilon}{2M}M + \dfrac{\varepsilon}{2M}M = \varepsilon. \]
+Thus $f_ng_n$ is uniformly convergent. 
+\end{proof}
+
+\begin{theorem}
+	Let $f_n$ be a sequence of functions defined on $E \subset \RR$ that converges uniformly on $A$ to a function $f$. If each $f_n$ is continuous at $c \in A$, then $f$ is continuous at $c$. 
+\end{theorem}
+\begin{proof}
+	Let $\varepsilon > 0$. As $f_n \to f$ uniformly on the set $E$, choose a fixed $N \in \NN$ such that $|f_N(x) - f(x)| \leq \frac{\varepsilon}{3}$, for all $x \in E$. Since $f_N$ is continuous, for any $c \in E$, we can choose $\delta > 0$ such that $|x-c| \leq \delta$ implies $|f_N(x) - f_N(c)|$ for all $x \in E$. Then we have 
+	\[ |f(x) - f(c)| = |f(x) - f_N(x)| + |f_N(x) - f_N(c)| + |f_N(x) - f(c)| \leq \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon, \] as desired. Thus \[ \lim_{x\to c} f(x) = f(c), \] and $f$ is continuous at $c$ for all $c \in E$. 
+\end{proof}
+
+Finally, let's look at an example. 
+\begin{example}
+	Prove that $f_n(x) = x^n$ converges uniformly on $[0, c]$ for all $c \in (0,1)$. 
+\end{example}
+\begin{proof}
+	Let $\varepsilon > 0$. Since $c \in (0,1)$, we know that $\{c^n\} \to 0$. Then there exists an $N \in \NN$ such that for all $n \geq N$, $|c^n - 0| = c^n \leq \varepsilon$. Then we have 
+	\[ |x^n - 0| = x^n \leq c^n \leq \varepsilon , \] for all $x \in [0,c]$, and $x^n$ converges to 0 uniformly on $[0,c]$. 
+\end{proof}
+
+\section{Limit Theorems}
+Just like with sequences, sequences of functions also have a Cauchy criterion. 
+\begin{theorem}[Cauchy Criterion for Uniform Convergence]
+A sequence of functions $f_n(x)$ converges uniformly on a set $E \subset \RR$ iff for every $\varepsilon > 0$ there exists an $N \in \NN$ such that 
+\[ |f_n(x) - f_m(x)| \leq \varepsilon \] for all $m \geq n \geq N$ and $x \in E$. 
+\end{theorem}
+\begin{proof}
+Suppose $f_n \to f$ uniformly on $E$. Let $\varepsilon > 0$. Choose $N \in \NN$ so that for all $n \geq N$, 
+\[ |f_n(x) - f_m(x)| \leq \dfrac{\varepsilon}{2} \] for all $x \in E$. Then if $m \geq n \geq N$, we have 
+\[ |f_n(x) - f_m(x)| \leq |f_n(x) - f(x)| + |f(x) - f_m(x)| \leq \dfrac{\varepsilon}{2} + \dfrac{\varepsilon}{2} = \varepsilon. \] 
+
+Now suppose that for any $\varepsilon > 0$, there exists an $N \in \NN$ such that for all $m \geq n \geq N$, 
+\[ |f_n(x) - f_m(x)| \leq \varepsilon \] for all $x \in E$. Then for each $x \in E$, $\{f_n(x)\}$ is Cauchy, and $\{f_n(x)\}$ converges, and $f_n$ converges to $f$ pointwise. Then we have 
+\[ |f_n(x) - f(x)| = \lim_{m \to \infty} | f_n(x) - f_m(x) | \leq \varepsilon \] for all $n \geq N$ and $x \in E$. So $f_n$ converges to $f$ uniformly. 
+\end{proof}
+
+\begin{theorem}
+If $f_n \to f$ uniformly on $[a,b]$, and each $f_n$ is integrable then 
+\[ \lim_{n\to \infty} \int_a^b f_n = \int_a^b f, \] and $f$ is integrable. 
+\end{theorem}
+\begin{proof}
+We prove $f$ is integrable first. Let $\varepsilon > 0$. Since $f_n \to f$ uniformly on $[a,b]$, there exists an $N \in \NN$ such that 
+\[ |f_N(x) - f(x)| \leq \dfrac{\varepsilon}{2(b-a)} \] for all $x \in [a,b]$. Let $d(x) = f(x) - f_N(x)$. Note that $|d(x)| \leq \dfrac{\varepsilon}{2(b-a)}$. Let $P$ be any partition of $[a,b]$. Then 
+\[ U_P(d) - L_P(d) = \sum_{i=1}^n (M_i - m_i)\Delta x_i \leq 2 \left (\dfrac{\varepsilon}{2(b-a)} \right ) \sum_{i=1}^n \Delta x_i = \dfrac{\varepsilon}{b-a} (b-a) = \varepsilon. \] Then $d(x)$ is integrable, and $f(x) = d(x) + f_N(x)$ is integrable on $[a,b]$. 
+
+Now that $f$ is integrable, we prove that 
+\[ \int_a^b f(x) \diff x = \lim_{n \to \infty} \int_a^b f_n(x) \diff x. \]
+Let $\varepsilon > 0$. Since $f_n \to f$ uniformly on $[a,b]$, there exists an $M \in \NN$ such that for all $n \geq M$, 
+\[ |f_n(x) - f(x)| \leq \dfrac{\varepsilon}{b-a} \] for all $x \in [a,b]$. Then we have 
+\[ \left | \int_a^b f_n(x) \diff x - \int_a^b f(x) \diff x \right | = \left |\int_a^b f_n(x) - f(x) \diff x \right | \leq \int_a^b |f_n(x) - f(x)| \diff x \leq \dfrac{\varepsilon}{b-a}(b-a) = \varepsilon, \] as desired. 
+\end{proof}<++>
+\section{The Supremum Norm}
+We have already seen an example of a \vocab{norm} before, namely the \vocab{Euclidean Norm}: 
+\begin{definition}
+The \vocab{Euclidean Norm} of a vector $v \in \RR^n$ is 
+\[ ||v|| = \sqrt{\langle x,x \rangle} = \ \left ( \sum_{i=1}^n x_i^2 \right )^\frac{1}{2}. \]
+\end{definition}
+We can think of the norm as a notion of the length or size of something. Now for the full definition:
+\begin{definition}
+A \vocab{norm} is a function $||\cdot||: \mathcal{V} \to \RR$ satisfying the following:
+\begin{enumerate}
+\item \vocab{Positivity}: $||v|| \geq 0$ for all $v \in \mathcal{V}$. 
+\item \vocab{Nondegeneracy}: $||v|| = 0$ iff $v = 0$. 
+\item \vocab{Multiplicativity}: $||\lambda v|| = |\lambda|||v||$ for all $v \in \mathcal{V}$ and scalar $\lambda$. 
+\item \vocab{Triangle Inequality}: $||v + w|| \leq ||v|| + ||w||$ for all $w,v \in \mathcal{V}$. 
+\end{enumerate}
+\end{definition}
+
+We now consider the \vocab{$\ell_p$ norm}. For $p=1$, we can define the $\ell_1$ norm as 
+\[ ||x||_1 = |x_1| + |x_2| + \cdots + |x_n|. \]
+For $p=2$, the $\ell_2$ norm is 
+\[ ||x||_2 = (|x_1|^2 + |x_2|^2 + \cdots + |x_n|^2)^\frac{1}{2}. \] 
+As $p \to \infty$ we have $||x||_\infty = \sup{\{|x_1|, |x_2|, \cdots, |x_n|\}}$. This last one is especially important:
+\begin{definition}
+Let $f$ be a bounded function on a set $E \subset \RR$. Then the \vocab{supremum norm} of $f$ on $E$ is defined as 
+\[ ||f||_\infty = \sup\limits_{x \in E} |f(x)|. \]
+\end{definition}
+Let's look at some examples. 
+\begin{example}
+Find the supremum norm for $f(x) = \sin{x}$ on $E = \RR$. 
+\end{example}
+\begin{sol}
+We have 
+\[ ||f||_\infty = \sup{\{|\sin{x}| : x \in \RR\}} = 1. \] 
+\end{sol}
+
+\begin{example}
+Find the supremum norm of $f(x) = \begin{cases} 1 &\text{ if } x \in \QQ \\ 0 &\text{ otherwise. } \end{cases}$ on the set $E = [0,1]$. 
+\end{example}
+\begin{sol}
+It's ok if the function is not continuous, like this one. We have 
+\[ ||f||_\infty = 1. \] 
+\end{sol}
+
+Let's establish the notion of convergence. 
+\begin{definition}
+Let $\{f_n\}$ be a sequence of functions defined on $E \subset \RR^n$. We say $\{f_n\}$ converges to $f$ in the supremum norm if for all $\varepsilon > 0$, there exists an $N \in \NN$ such that 
+\[ ||f_n - f||_\infty \leq \varepsilon \] for all $n \geq N$. 
+\end{definition}
+This is similar to the normal definition of convergence, but in the supremum norm instead. 
+\begin{theorem}
+Let $\{f_n\}$ be a sequence of functions defined on $E \subset \RR^n$. Then $\{f_n\}$ converges uniformly on $E$ to a limit function $f$ iff $\{f_n\}$ converges to $f$ in the supremum norm on $E$. 
+\end{theorem}
+\begin{proof}
+Suppose $f_n\to f$ uniformly on $E$. Then given any $\varepsilon > 0$, there exists an $N \in \NN$ such that 
+\[ |f_n(x) - f(x)| \leq \varepsilon \] for all $n \geq \NN$ and $x \in E$. Then $\varepsilon$ is an upper bound of
+\[ \{|f_n(x) - f(x)| : x \in E \}, \] and it follows that $||f_n - f||_\infty \leq \varepsilon$ for all $n \geq N$. 
+
+Now suppose for all $\varepsilon > 0$, there exists an $N \in \NN$ such that $||f_n - f||_\infty \leq \varepsilon$ for all $n \geq N$. Then $|f_n(x) - f(x)| \leq \varepsilon$ for all $n \geq N$ and $x \in E$. Thus $f_n \to f$ uniformly on $E$, and we are done. 
+\end{proof}
+
+Now that we've established convergence, we can also establish the notion of a Cauchy sequence:
+\begin{definition}
+Let $\{f_n\}$ be a sequence of functions defined on $E \subset \RR^n$. We say $\{f_n\}$ is a Cauchy sequence in the supremum norm if for all $\varepsilon > 0$, there exists an $N \in \NN$ such that 
+\[ ||f_n - f_m||_\infty \leq \varepsilon\] for all $m \geq n \geq N$. 
+\end{definition}
+
+Recall that a \vocab{complete} metric space is one such that all Cauchy sequences converge to a point in that space. 
+If $f_n \in \mathcal{S}$ is Cauchy in the supremum norm, then there must be a limit function $f \in \mathcal{S}$ such that $f_n \to f$ if $\mathcal{S}$ is a complete metric space. 
+
+\begin{theorem}
+$C([a,b])$ is complete in the supremum norm. 
+\end{theorem}
+\begin{proof}
+Let $\varepsilon > 0$. Choose $N \in \NN$ such that for $m \geq n \geq N$, $||f_n - f_m|| \leq \varepsilon$. Then 
+\[ |f_n(x) - f_m(x)| \leq \varepsilon \] for all $x \in [a,b]$. Then $\{f_n(x)\}$ is Cauchy for all $x$. By the Cauchy Criterion for uniform convergence, $\{f_n\}$ converges uniformly to $f = \lim\limits_{n\to\infty} f_n(x)$. Since all $f_n \in C([a,b])$ and $f_n \to f$ uniformly, $f \in C([a,b])$, and $C([a,b])$ is complete in the supremum norm. 
+\end{proof}
+In other words, this theorem states that if $\{f_n\}$ is Cauchy with respect to the supremum norm, then there is an $f \in C([a,b])$ such that $f_n \to f$. 
+\begin{remark}
+Just because a space is complete in the supremum norm does \emph{not} make it complete in other norms. For example, $C([a,b])$ is not complete with respect to the $L^1$ norm
+\[ ||f||_1 = \int_a^b |f(x)| \diff x. \] 
+\end{remark}
+
+\section{Metric Spaces}
+We now formally consider \vocab{metric spaces}. 
+\begin{definition}
+	A \vocab{metric space} $(\mathcal{M}, \rho)$ is a set $\mathcal{M}$ and a function $\rho : \mathcal{M} \times \mathcal{M}$ that satisfies the following: 
+	\begin{enumerate}
+		\item \vocab{Positivity}: $\rho(x,y) \geq 0$ for all $x, y \in \mathcal{M}$. 
+		\item \vocab{Nondegeneracy}: $\rho(x,y) = 0$ iff $x = y$. 
+		\item \vocab{Symmetry}: $\rho(x,y) = \rho(y,x)$ for all $x,y \in \mathcal{M}$. 
+		\item \vocab{Triangle Inequality}: $\rho(x,y) \leq \rho(x,z) + \rho(z,y)$ for all $x, y, z \in \mathcal{M}$. 
+	\end{enumerate}
+\end{definition}
+For instance, we can define $\rho(x,y)$ as the Euclidean norm, then we can make a metric space $(\RR, \rho)$. 
+
+\begin{definition}
+	The \vocab{taxicab metric} or the \vocab{rectilinear distance} between two points $(x_1, y_1)$ and $(x_2, y_2)$ is $|x_1 - x_2| + |y_1 - y_2|$. Note that the taxicab distance between two points is \emph{never} less than the straight line distance (euclidean norm) between themm. 
+\end{definition}
+
+There are many paths with equal distance from one point to another, trivial by combo. 
+
+\begin{definition}
+	The \vocab{discrete metric} is defined as 
+	\[ \rho(x,y) = \begin{cases} 0 &\text{ if } x = y \\ 1 &\text{ otherwise. } \end{cases}. \] 
+\end{definition}
+As shown, there are many different metrics. We can define the notion of equivalency (assuming both metrics are functions on the same set):
+\begin{definition}
+	Two metrics, say $\rho$ and $\sigma$ on the same set $\mathcal{M}$ are \vocab{equivalent} if for every $\varepsilon > 0$ and $x \in \mathcal{M}$ there exists a $\delta > 0$ such that for all $y \in \mathcal{M}$ we have 
+	\[ \rho(x,y) < \delta \text { implies } \sigma(x,y) < \varepsilon, \] 
+	and that 
+	\[ \sigma(x,y) < \delta \text{ implies } \rho(x,y) < \varepsilon. \]
+\end{definition}
+Let's look at an example. 
+\begin{example}
+	Let $\rho$ be the Euclidean metric and $\sigma$ be the taxicab metric. Prove that under $\RR^2$ that $\rho$ and $\sigma$ are equivalent. 
+\end{example}
+\begin{soln}
+	Let $\varepsilon > 0$ and choose $\delta < \frac{\varepsilon}{2}$. If $\rho(p,q) < \delta$, then \[|p_i - q_i| \leq \rho(x,y) < \delta. \] Then \[ \sigma(p,q) = |p_1 - q_1| + |p_2 - q_2| < 2\delta < \varepsilon. \] 
+
+	If $\sigma(p,q) < \delta$, then $|p_i - q_i| < \delta$ means 
+	\[ \rho(p,q) = ( |p_1 - q_1|^2 + |p_2 - q_2|^2 )^\frac{1}{2} < (2\delta^2)^\frac{1}{2} = \frac{\varepsilon}{\sqrt{2}} < \varepsilon. \]
+	Thus $\rho$ and $\delta$ are equivalent. 
+\end{soln}
+
+\begin{proposition}
+	Let $\rho$ and $\sigma$ be two equivalent metrics on a set $\mathcal{M}$ and suppose that $\{x_n\}$ is a sequence in $\mathcal{M}$. Then $x_n \to x$ in $\rho$ iff $x_n \to x$ in $\sigma$. 
+\end{proposition}
+This is useful to check whether two metrics are equivalent. 
+\begin{example}
+	Let $\rho$ be the Euclidean metric and $\sigma$ be the discrete metric. Prove that $\rho$ and $\sigma$ are \emph{not} equivalent on $[0,1]$. 
+\end{example}
+\begin{soln}
+	Consider $\{\frac{1}{n}\}$. In the Euclidean metric, $\frac{1}{n} \to 0$, so $\{\frac{1}{n}$ converges. But with the discrete metric, $\sigma(\frac{1}{n}, 0) = 1$ for all $n \in \NN$, and $\frac{1}{n}$ does not converge to 0. Thus $\rho$ and $\sigma$ are not equivalent. 
+\end{soln}
+
+\section{Contraction Mapping}
+Contraction mappings are functions that are important to DP problems. 
+\begin{definition}
+	Let $(\mathcal{M}, \rho)$ be a metric space. A function $T: \mathcal{M} \to \mathcal{M}$ is a \vocab{contraction} if there is an $\alpha$ which satisfies $0 \leq \alpha < 1$ such that 
+	\[ \rho(T(x), T(y)) \leq \alpha\rho(x,y) \] for all $x, y\in \mathcal{M}$. 
+\end{definition}
+A quick example:
+\begin{example}
+	Assuming $\rho$ is the Euclidean metric, we have $f(x) = mx + b$ for $m \in [0,1)$ on $\RR$. Then we have $|f(x) - f(y)| = m|x-y|$, so $f$ is a contraction. 
+\end{example}
+
+Note that while something may seem to be a contraction, the property that $T: \mathcal{M} \to \mathcal{M}$ \emph{must} hold in order for $T$ to be a contraction mapping. 
+
+\begin{theorem}[Contraction Mapping Principle]
+	Let $T$ be a contraction on a complete metric space $(\mathcal{M}, \rho)$. Then there exists a unique point $x \in \mathcal{M}$ such that $T(x) = x$. Furthermore, the sequence defined recursively by 
+	\[ x_{n+1} = T(x_n)\] where $x_0 \in \mathcal{M}$ must converge to $x$ as $n \to \infty$. 
+\end{theorem}
+\begin{proof}
+	Since $T$ is a contraction mapping, we have $|T^{n+1}(x_0) - T^n(x_0)| \leq \alpha|T^n(x_0) - T^{n-1}(x_0)| \leq \alpha^2|T^{n-1}(x_0) - T^{n-2}(x_0)| \leq \cdots \leq \alpha^n|T(x_0) - T^0(x_0)| = \alpha^n|x_1 - x_0|$. 
+
+	Suppose $m > n$. Then 
+	\[ |T^m(x_0) - T^n(x_0)| \leq |T^m(x_0)- T^{m-1}(x_0)|  + |T^{m-1}(x_0) - T^{m-2}(x_0)| + \cdots + |T^{n+1}(x_0) - T^n(x_0)| \leq \]
+	\[ \sum\limits_{k=n}^{m-1} \alpha^k |x_1 - x_0| = \alpha^n \dfrac{|x_1 - x_0}{1-\alpha}. \] This tends to 0 as $n \to \infty$, so $\{T^n(x_0)\}$ is Cauchy. Since $\mathcal{M}$ is a complete metric space, this means that the above is convergent in $\mathcal{M}$. As $T$ must be continuous by the definition of a contraction, we have 
+	\[ x = \lim x_n+1 = \lim T(x_n) = T(\lim x_n) = T(x), \] meaning $x$ is a fixed point. Assume, for the sake of contradiction, that $T(x) = x$, $T(y) = y$, and $x \neq y$ for some $x, y \in\mathcal{M}$. Then we have 
+	\[ \alpha|x-y| \geq |T(x) - T(y)| = |x-y| \rightarrow \alpha \geq 1, \] a contradiction. Thus $x$ is unique, and we are done. 
+\end{proof}<++>
+

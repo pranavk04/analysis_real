@@ -1,0 +1,204 @@
+\chapter{The Riemann Integral}
+
+\section{Riemann Integration}
+\begin{definition}
+A \vocab{partition} $P$ of $[a,b]$ is a finite ordered set
+\[ P = \{a = x_0 < x_1 < x_2 < \cdots < x_{n-1} < x_n = b \}. \]
+\end{definition}
+
+Suppose $f$ is a not necessarily continuous bounded function on $[a,b]$. Given a partiton $P$, we can consider the $i$th subinterval $[x_{i-1}, x_i]$. Since $f$ is bounded, the supremum property implies we can define 
+\[ m_i = \inf{\{f(x) : x \in [x_{i-1}, x_i] \}}, \]
+\[ M_i = \sup{\{f(x) : x \in [x_{i-1}, x_i]\}}. \]
+
+Then we can define the following:
+\begin{definition}
+The \vocab{lower sum} with respect to $P$ is 
+\[ L_P(f) = \sum_{i=1}^N m_i(x_i - x_{i-1}). \]
+Similarly, the \vocab{upper sum} with respect to $P$ is 
+\[ U_P(f) = \sum_{i=1}^N M_i(x_i - x_{i-1}). \]
+\end{definition}
+
+Note that we have $U_P(f) - L_P(f) = \displaystyle\sum_{i=1}^N (M_i - m_i)(x_i - x_{i-1}) \geq 0$, as $M_i - m_i \geq 0$ and the difference between the $x_i$ is positive. Then we can conclude that $U_P(f) \geq L_P(f)$. 
+
+\begin{definition}
+A partition $Q$ is called a \vocab{refinement} of a partition $P$ if $Q$ contains all the points of $P$, or $P \subseteq Q$. 
+\end{definition}
+
+\begin{lemma*}
+If $P \subseteq Q$, then $L_P(f) \leq L_Q(f)$, and $U_Q(f) \leq U_P(f)$. 
+\end{lemma*}
+\begin{proof}
+Since $P$ and $Q$ are finite, we can assume that $Q$ adds just a single new point to $P$. Suppose $[x_{k-1}, x_k]$ of $P$ is refined to $[x_{k-1}, \overline{x}]$ and $[\overline{x}, x_k]$. Let $m_i = \inf{\{f(x): x \in [x_{i-1}, x_i]\}}$. Ten we have $L_Q(f)$ being the sum of the $m_i\Delta x_i$ and the infimi of $[x_{k-1}, \overline{x}]$ and $[\overline{x},x_k]$, which is greater than $L_P(f)$, which is the same sum but $[x_{k-1}, x_k]$ instead. 
+\end{proof}
+
+\begin{lemma*}
+If $P$ and $Q$ are \emph{any} two partitions of $[a,b]$, then $L_P(f) \leq U_P(f)$. 
+\end{lemma*}
+\begin{proof}
+Let $P' = P \cup Q$. Then 
+\[ L_P(f) \leq L_R(f) \leq U_R(f) \leq U_Q(f). \]
+\end{proof}
+
+\begin{definition}
+Let $\mathcal{P}$ be the collection of all possible partitions of $[a,b]$. Then the \vocab{upper integral} of $f$ is defined as 
+\[ U(f) = \inf\limits_\mathcal{P} \{U_P(f): P \in \mathcal{P} \}. \]
+Similarly, the \vocab{lower integral} of $f$ is defined as 
+\[ L(f) = \sup\limits_\mathcal{P} \{L_P(f) : P \in \mathcal{P} \}. \]
+\end{definition}
+
+\begin{proposition*}
+For any bounded function $f: [a,b] \to \RR$, $U(f) \geq L(f)$. 
+\end{proposition*}
+\begin{proof}
+Suppose $U(f) < L(f)$. Then by the characterization of the supremum, there exists some $P$ and $Q$ such that $L_P(f) \in [L(f) - \frac{L(f) - U(f)}{3}, L(f)]$, and $U_Q(f) \in [U(f), U(f) + \frac{L(f) - U(f)}{3}]$. This implies $U_Q(f) < L_P(f)$, a contradiction. 
+\end{proof}
+
+\begin{definition}
+A bounded function $f : [a,b]$ is \vocab{Riemann integrable} if $U(f) = L(f)$. Then we define 
+\[ \int_a^b f(x) \diff x = U(f) = L(f). \]
+\end{definition}
+
+\begin{lemma}[Riemann Integrability Criterion]
+A bounded function $f : [a,b]$ is integrable iff for every $\varepsilon > 0$ there exists a partition $P_\varepsilon$ such that 
+\[ | U_{P_\varepsilon}(f) - L_{P_\varepsilon}(f)| \leq \varepsilon. \]
+\end{lemma}
+\begin{proof}
+Let $\varepsilon > 0$, and choose $P_\varepsilon$ accordingly. Note that $$|U(f) - L(f)| = U(f) - L(f) \leq U_{P_\varepsilon}(f) - L(f) \leq U_{P_\varepsilon}(f) - L_{P_\varepsilon} \leq \varepsilon.$$ Since $\varepsilon$ was arbitrary, $U(f) = L(f)$. 
+\newline\newline
+Now suppose $f$ is Riemann integrable, and let $\varepsilon > 0$. By the characterization of the supremum, there exists a $P_1$ such that $U_{P_1}(f) \in [U(f), U(f) + \frac{\varepsilon}{2}]$. Similarly there exists a $P_2$ such that $L_{P_2}(f) \in [L(f) - \frac{\varepsilon}{2}, L(f)]$. Let $P_\varepsilon = P_1 \cup P_2$. Then  
+\[ U_{P_\varepsilon}(f) - L_{P_\varepsilon}(f) \leq U(f) + \dfrac{\varepsilon}{2} -(L(f) - \dfrac{\varepsilon}{2}) = \varepsilon, \] as desired. 
+\end{proof}
+
+Next we show that continuity on an interval implies integrability on that interval. 
+
+\begin{theorem}
+If $f$ is continuous on $[a,b]$, then $f$ is Riemann integrable on $[a,b]$. 
+\end{theorem}
+\begin{proof}
+Since $f$ is conitnuous and $[a,b]$ is a closed, bounded interval, $f$ is uniformly continuous on $[a,b]$. Let $\varepsilon > 0$, and choose $\delta > 0$ such that $\forall x,y \in [a,b]$ with $|x-y| \leq \delta$, 
+\[ |f(x) - f(y)| \leq \dfrac{\varepsilon}{b-a}. \]
+Let $P_\varepsilon$ be any partition of $[a,b]$ for which $\Delta x_i \leq \delta$ for all $i$. For each $[x_{i-1}, x_i]$, $f$ must attain its maximum, $M_i$, and its minimum, $m_i$. By uniform continuity, we have $|M_i - m_i| \leq \frac{\varepsilon}{b-a}$. Then we have 
+\[ U_{P_\varepsilon}(f) - L_{P-\varepsilon}(f) = \sum (M_i - m_i)\Delta x_i \leq \sum \dfrac{\varepsilon}{b-a} \Delta x_i = \dfrac{\varepsilon}{b-a} (b-a) = \varepsilon. \] Thus $f$ is Riemann integrable. 
+\end{proof}
+
+\begin{definition}
+Let's define some properties of the integral, assuming $f,g : [a,b] \to \RR$ are integrable functions on $[a,b]$, and let $\alpha, \beta \in \RR$. 
+\begin{enumerate}
+\item \vocab{Linearity}: The function $\alpha f + \beta g$ is integrable, and 
+\[ \int_a^b (\alpha f(x) + \beta g(x)) \diff x = \alpha \int_a^b f(x) \diff x + \beta\int_a^b g(x) \diff x. \]
+\item \vocab{Monotonicity}: If $f(x) \leq g(x)$ for all $x \in [a,b]$ then 
+\[ \int_a^b f(x) \diff x \leq \int_a^b g(x) \diff x. \]
+\item The function $|f(x)|$ is integrable, and 
+\[\left | \int_a^b f(x) \diff x \right | \leq \int_a^b |f(x)| \diff x. \]
+\item If $m \leq f(x) \leq M$ for all $x \in [a,b]$, then 
+\[ m(b-a) \leq \int_a^b f(x) \diff x \leq M(b-a). \]
+\end{enumerate}
+\end{definition}
+
+This last theorem is pretty useful. 
+
+\begin{theorem}
+Assume $f: [a,b] \to \RR$ is bounded, and let $c \in (a,b)$. Then $f$ is integrable on $[a,b]$ iff $f$ is integrable on $[a,c]$ and $[c,b]$. Then we have 
+\[ \int_a^b f(x) \diff x = \int_a^c f(x) \diff x + \int_c^b f(x) \diff x. \]
+\end{theorem}
+The proof is kind of long and I'm lazy so rip. 
+
+\section{Riemann-Stieltjes Integrals}
+\begin{definition}
+Let $\alpha$ be a monotonically increasing function on $[a,b]$. Since $\alpha(a)$ and $\alpha(b)$ are finite, $\alpha$ is bounded on $[a,b]$. For each partition $P$ of $[a,b]$ we write 
+\[ \Delta \alpha_i = \alpha(x_i) - \alpha(x_{i-1}). \] For any real $f$ bounded on $[a,b]$ we define 
+\[ U_P(f, \alpha) = \sum_{i=1}^n M_i \Delta \alpha_i, \]
+\[ L_P(f, \alpha) = \sum_{i=1}^n m_i \Delta \alpha_i \] as the upper and lower sums with respect to $P$. We define the upper and lower integral similarly, as the infimum and supremum of the upper and lower sums, respectively. When these are equal we denote them by 
+\[ \int_a^b f \diff \alpha = \int_a^b f(x) \diff \alpha(x). \] This is known as the \vocab{Riemann-Stieltjes integral}, or simply the \vocab{Stieltjes integral} of $f$ with respect to $\alpha$. The Riemann integral is a special case of this integral, with $\alpha(x) = x$. But $\alpha$ need not even be continuous!
+\end{definition}
+Sometimes we define the space of integrable functions as $\mathcal{R}$, and if $f$ is integrable we say that $f \in \mathcal{R}$. Let's investigate the integrability of functions with regards to the Stieltjes integral:
+\begin{theorem}
+If $f$ is monotonic on $[a,b]$, and if $\alpha$ is continuous on $[a,b]$, then $f \in \mathcal{R}(\alpha)$. (In other words, $f$ is Sjteltjes integrable). 
+\end{theorem}
+\begin{proof}
+Let $\varepsilon > 0$. For any $n \in \ZZ^+$, choose a partition 
+\[ \Delta \alpha_i = \dfrac{\alpha(b) - \alpha(a)}{n} \] for $i = 1,\cdots,n$. It is always possible to choose such a partition as $\alpha$ is continuous on $[a,b]$. Assume, WLOG that $f$ is monotonically increasing. Then if $M_i = f(x_i)$ and $m_i = f(x_{i-1})$, we have 
+\[ U_P(f, \alpha) - L_P(f, \alpha) = \dfrac{\alpha(b) - \alpha(a)}{n} \sum\limits_{i=1}^n f(x_i) - f(x_{i-1}) = \dfrac{\alpha(b) - \alpha(a)}{n} f(b) - f(a) < \varepsilon \] for large $n$, as desired. By the integrability criterion, $f \in \mathcal{R}$. 
+\end{proof}
+\section{Change of Variable}
+\begin{theorem}[Change of Variable]
+Let $\varphi$ be a strictly increasing continuous function that maps $[A,B] \to [a,b]$. Let $\alpha$ be monotonically increasing on $[a,b]$ and $f \in \mathcal{R}(\alpha)$ on $[a,b]$. Define $\beta$ and $g$ on $[A,B]$ by $\beta(y) = \alpha(\varphi(y))$, and $g(y) = f(\varphi(y))$. Then $g \in \mathcal{R}(\beta)$ and 
+\[ \int_A^B g \diff \beta = \int_a^b f \diff \alpha. \] 
+\end{theorem}<++>
+\section{Integration With Discontinuities}
+
+Just because a function is discontinuous on an interval $[a,b]$ does \emph{not} mean that is not Riemann integrable on that interval. 
+\begin{theorem}
+If $f: [a,b] \to \RR$ is monotone, then $f$ is Riemann integrable. 
+\end{theorem}
+\begin{proof}
+Without loss of generality, suppose $f$ is monotone increasing. If $f$ is constant, it is continuous and thus integrable, so suppose $f(b) > f(a)$. Let $\varepsilon > 0$. Choose $\delta > 0$ such that $\delta = \frac{\varepsilon}{f(b) - f(a)}$. Choose any partition $P_\varepsilon$ of $[a,b]$ so that $\Delta x_i \leq \delta$ $\forall 1 \leq i \leq n$. Then 
+\[ U_{P_\varepsilon}(f) - L_{P_\varepsilon}(f) = \sum (M_i - m_i)\delta x_i \leq \sum (f(x_i) - f(x_{i-1}))\delta = \] \[\delta ( f(x_1) - f(a) + f(x_2) - f(x_1) + \cdots + f(b) - f(x_{n-1})) = \dfrac{\varepsilon}{f(b) - f(a)} (f(b) - f(a)) = \varepsilon.\]
+\end{proof}
+
+This next theorem shows that a finitely discontinuous function on $[a,b]$ is still Riemann integrable. 
+\begin{theorem}
+Any function $f: [a,b]$ with a finite number of discontinuities is integrable. 
+\end{theorem}
+\begin{proof}
+Let $\varepsilon >0$, and choose $M > 0$ as a bound for $f$. We have two cases:
+\begin{itemize}
+\item Case $f$ has a discontinuity at an endpoint: WLOG, assume $f$ is discontinuous at $a$. Then $f$ is continuous on $[a + \dfrac{\varepsilon}{4M}, b]$, so there exists a partition $P$ such that $U_P(f) - L_P(f) \leq \dfrac{\varepsilon}{2}$. Let $P_\varepsilon = \{a\} \cup P$, and suppose $|P_\varepsilon| = n+1$. Then we have 
+\[ U_{P_\varepsilon}(f) - L_{P_\varepsilon}(f) = \sum (M_i - m_i)\Delta x_i = (M_1 - m_1)\Delta x_1 + \sum_2^n (M_i - m_i)\Delta x_i \leq 2M \left (a + \dfrac{\varepsilon}{4M} - a \right ) + \dfrac{\varepsilon}{2}, \] which equals $\varepsilon$. Thus $f$ is integrable on $[a,b]$. The proof is similar for discontinuity at $b$. 
+\item $f$ has discontinuity at some $c \in [a,b]$: If $f$ is discontinuous at $c$, then it is integrable on $[a,c]$ and $[b,c]$, and is thus integrable on $[a,b]$.  
+\end{itemize}
+
+Assume $f$ is integrable if it has $k \geq 2$ points of discontinuity in $[a,b]$, denoted as $\{y_1, \cdots, y_n\}$. Consider $f$ on $[a, \frac{y_1 + y_2}{2}]$ and $[\frac{y_1 + y_2}{2}, b]$. On these intervals, $f$ has 1 and $k-1$ points of discontinuity. Thus we can always create $P_\varepsilon = P_1 \cup P_2$, and keep on going. Thus $f$ is integrable on $[a,b]$, and the result follows from induction. 
+\end{proof}
+
+\begin{theorem}
+If $f: [a,b] \to \RR$ is bounded, and $f$ is integrable on $[c,b]$ for all $c \in (a,b)$, then $f$ is integrable on $[a,b]$. 
+\end{theorem}
+
+Let's look at an interesting example. 
+
+\begin{example}[Thomae's Function] Let's see if this function is integrable or not. \newline
+Let $f(x): [0,1] \to \RR$ be defined by 
+\[ f(x) = \begin{cases} 1 &\text{ if } x = 0 \text{ or } 1 \\ \frac{1}{q} &\text{ if } x \in \QQ \cap (0,1) \text { with } x = \frac{p}{q} \text { in reduced form } \\ 0 &\text{otherwise.} \end{cases} \]
+\end{example}
+This function is discontinuous at every rational, but continuous at every irrational, and is still Riemann integrable. If the set of discontinuities has \vocab{measure zero}, $f$ is integrable. A simple definition of this is that if a set $X$ is finite, or countable, then it has measure zero (which fits with our earlier theorem that the set of discontinuities must be \emph{finite}).
+
+\section{Improper Integrals}
+\begin{definition}
+Suppose that $f$ is a continuous function on $(a,b]$. If the following limit exists, then 
+\[ \int_a^b f(x) \diff x = \lim_{\sigma\searrow 0}\int_{a + \sigma}^b f(x) \diff x \] is called the \vocab{improper Riemann integral} of $f$ on $[a,b]$. 
+\end{definition}
+
+An important technique that we can use is \vocab{comparison}. Recall that if a limit $L \geq 0$ is less than a limit $L'$ on $[a,b]$, then if $L'$ converges, so does $L$. By finding a function with an improper integral on $[a,b]$ that is greater than the function $f$ in question, we can state that $f$ has an improper integral on $[a,b]$ provided that $f(x) \geq 0$ $\forall x \in [a,b]$. \newpage
+
+\begin{proposition}
+Suppose $f(x) = x^{n}$. Then 
+\[ \int_0^1 f(x) \diff x \] exists provided that $n > -1$.
+\end{proposition}
+\begin{proof}
+We can easily integrate  
+\[ \int_\sigma^1 x^n \diff x = \dfrac{x^{n+1}}{n+1} \vert_\sigma^1 .\] From this we know that 
+\[ \lim_{\sigma \searrow 0} \int_\sigma^1 f(x) \diff x \] diverges if $n \leq -1$. 
+\end{proof}
+
+\begin{remark*}
+When using comparison, note that it still holds under $u$ and trig substitution, as well as integration by parts. 
+\end{remark*}
+
+\begin{definition}
+Suppose that $f$ is a continuous function on $[a, \infty)$. If the following limit exists, then 
+\[ \int_a^\infty f(x) \diff x = \lim_{b\to\infty} \int_a^b f(x) \diff x \] is called the \vocab{improper Riemann integral} of $f$ on $[a,\infty)$. 
+\end{definition}
+
+For polynomial $f$, the opposite of the result for $[0,1]$ holds here: $f$ has an improper integral on $[a,\infty)$ if $n < -1$. 
+
+Let's look at an example. 
+\begin{example}
+Does 
+\[ \int_0^1 \dfrac{\cos{x}}{\sqrt{1-x}}\] have an improper Riemann integral?
+\end{example}
+\begin{proof}
+Note that we have a $u$ substitution, namely $u = 1-x$. Then $\diff u = \diff x$ and we have 
+\[ \int_1^0 \dfrac{\cos{1-u}}{\sqrt{u}} (-\diff u) = \int_0^1 \dfrac{\cos{1-u}}{\sqrt{u}} \diff u. \]
+We have $0 \leq \dfrac{\cos{1-u}}{\sqrt{u}} \leq \dfrac{1}{\sqrt{u}}$, which we know has a convergent limit, so the improper integral exists. 
+\end{proof}

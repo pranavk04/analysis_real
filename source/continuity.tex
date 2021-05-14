@@ -1,0 +1,77 @@
+\chapter{Continuity}
+
+\section{Continuous Functions}
+\begin{definition}
+A function $f$ is said to be \vocab{continuous} at $c \in \dom{f}$ if for every sequence $x_n$ of points in $\dom{f}$ which converge to $c$ we have $$ \lim f(x_n) = f(c).$$ We say $f$ is continuous if it is continuous at every point $c \in \dom{f}$.
+\end{definition}
+\begin{example}
+Let's show that $f: \mathbb{R} \rightarrow \mathbb{R}, f(x) = 2x$ is continous on its domain. Choose any $c \in \mathbb{R}$, and suppose that $\{x_n\} \rightarrow c$. THen using the Algebraic Limit Theorem, 
+$$ \lim f(x_n) = \lim 2x_n = 2\lim x_n = 2c = f(c).$$ Thus $f$ is continuous on $\mathbb{R}$. 
+\end{example}
+\begin{theorem}
+Let $f$ and $g$ be continuous functions, and define $D = \dom{f} \cap \dom{g}$. Then, 
+\begin{enumerate}
+\item $f(x) + g(x)$ is continuous on $D$. 
+\item $f(x)$ is continuous on $\dom{f}$ for any $k \in \mathbb{R}$. 
+\item $f(x)g(x)$ is continuous on $D$. 
+\item $\dfrac{f(x)}{g(x)}$ is continuous at all $ x\in D$ such that $g(x) \neq 0$. 
+\end{enumerate}
+\end{theorem}
+\begin{proposition}[Sequential Criterion for Discontinuity]
+Let $f$ be a function defined on $A$, and let $c \in A$. If there exist two sequences $x_n$ and $y_n$ in $A$ with $x_n \neq c$ and $y_n \neq c$, where $\lim x_n = c = \lim y_n$ but $\lim f(x_n) \neq \lim f(y_n)$, then $f$ is not continuous at $c$. 
+\end{proposition}
+
+\begin{theorem}[$\delta$-$\varepsilon$ Convergence]
+A function $f(x)$ is continuous at a point $c \in \dom{f}$ iff for each $\varepsilon > 0$, there exists a $\delta > 0$ such that for all $x \in \dom{f}$, $|x-c| \leq \delta \Rightarrow |f(x)-f(c)| \leq \varepsilon$. 
+\end{theorem}
+Let's look at an example of a proof using this:
+\begin{example}
+Prove $f(x) = 3x-7$ is continuous on $\mathbb{R}$. 
+\end{example}
+\begin{proof}
+Let $\varepsilon >0$, and choose $\delta > 0$ such that $\delta \leq \frac{\varepsilon}{3}$. Then if $|x-c| \leq \delta$, we find $|f(x) - f(c)| = |3x -7 - 3c + 7| = 3|x-c| \leq 3\delta \leq \varepsilon$. Hence $f$ is continuous for all $c \in \mathbb{R}$, so $f$ is continuous on $\mathbb{R}$. 
+\end{proof}
+
+\newpage
+
+\begin{theorem}[Composition of Continuous Functions]
+Let $F: A \rightarrow \mathbb{R}$ and $g: B \rightarrow \mathbb{R}$, and assume the range of $f$ is contained in $B$ so that the function $(g\circ f)(x): A \rightarrow \mathbb{R}$ is well defined. Then if $f$ is continuous at $c \in A$, and if $g$ is continuous at $f(c) \in B$, then $g\circ f$ is continuous at $c$. 
+\end{theorem}
+Continuity at $c \in \dom{f}$ is the same thing as $$ \lim_{x\to c} f(x) = f(c),$$ where the limit is the familiar \vocab{functional limit} and $x \in \dom{f}$. 
+\section{Continuity on Closed Bounded Intervals}
+\begin{definition}
+A real valued function $f$ is said to be \vocab{bounded} on $S \subset \dom{f}$ if there exists a real number $B > 0$ such that $|f(x)| \leq B$ for all $x \in S$. 
+\end{definition}
+
+\begin{theorem}
+If $f$ is continuous on $[a,b]$, then $f([a,b]) = \{f(x) : a\leq x\leq b\}$ is bounded. 
+\end{theorem}
+
+\begin{definition}
+$\sup\limits_S f = \sup{\{f(x) | x \in S\}}$. $\inf\limits_S f = \inf{\{f(x)|x\in S\}}$. 
+\end{definition}
+
+\begin{theorem}[Extreme Value Theorem]
+If $f$ is continuous on $[a,b]$, then $f$ obtains its supremum (maximum) and infimum (minimum); There exists $c,d \in [a,b]$ such that $f(c) = \sup\limits_{[a,b]} f$ and $f(d) = \inf\limits_{[a,b]} f$. 
+\end{theorem}
+
+\begin{theorem}[Intermediate Value Theorem]
+If $f$ is continuous on $[a,b]$ and $f(a) \neq f(b)$, then for any $y$ between $f(a)$ and $f(b)$ there exists $c \in (a,b)$ such that $f(c) = y$. 
+\end{theorem}
+\begin{definition}
+A continuous function $f$ is \vocab{uniformly continuous} on $S \subset \dom{f}$ if for each $\varepsilon >0$ there is a $\delta > 0$ such that for all $x_1, x_2 \in S$, $|x_1-x_2| \leq \delta \Rightarrow |f(x_1) - f(x_2)| \leq \varepsilon$. 
+\end{definition}
+
+\begin{theorem}
+If $f$ is continuous on $[a,b]$, then $f$ is uniformly continuous on $[a,b]$. 
+\end{theorem}
+
+\begin{definition}
+A function $f$ is said to be \vocab{Lipschitz continuous} on $S\subset \dom{f}$ if there is an $M>0$ such that for all $x_1 \neq x_2 \in S$, 
+$$ \dfrac{|f(x_1)-f(x_2)}{|x_1-x_2|} \leq M.$$ 
+\end{definition}
+
+\begin{theorem}
+If $f$ is a Lipschitz continuous function on $S$, then $f$ is uniformly continuous on $S$.
+\end{theorem}
+

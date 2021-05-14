@@ -1,0 +1,158 @@
+\chapter{Derivatives}
+
+\section{Differentiable Function}
+\begin{definition}
+A function $f$ is said to be \vocab{differentiable} at a point $x \in \dom{f}$ if the limit of the difference quotient 
+\[ \dfrac{f(x+h) - f(x)}{h} \] exists as $h\to 0$. Then this limit is called the \vocab{derivative} of $f$ at $x$, denoted by 
+\[ f'(x) = \lim_{h\to 0} \dfrac{f(x+h) - f(x)}{h} = \dfrac{\diff f}{\diff x}. \]
+\end{definition}
+
+\begin{theorem}
+If $g: A\to\RR$ is differentiable at $c \in A$, then $g$ is continuous at $c$. 
+\end{theorem}
+\begin{proof}
+If $f'(c)$ exists, then 
+\[ f'(c) = \lim_{h\to 0} \dfrac{f(c+h) - f(c)}{h}. \]
+Then we have 
+\[ 0 = f'(c)\lim_{h\to 0} \dfrac{f(c+h) - f(c)}{h} \cdot \lim_{h\to 0} h = \lim_{h\to 0} f(c+h) - f(c). \]
+Thus $\lim\limits_{h\to 0} f(c+h) = f(c)$, so $f$ is continuous at $c$.
+\end{proof}
+
+\begin{theorem}[Combinations of Differentiable Functions]
+Let $f,g : A \to \RR$ and assume both are differentiable at a point $c \in A$. Let $k \in \RR$. Then we have:
+\begin{enumerate}
+\item $(f+g)'(c) = f'(c) + g'(c)$
+\item $(kf)'(c) = kf'(c)$
+\item $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$
+\item $\left ( \dfrac{f}{g} \right )' (c) = \dfrac{g(c)f'(c) - g'(c)f(c)}{|g(c)|^2}$ 
+\end{enumerate}
+\end{theorem}
+
+One last property of derivatives: 
+\begin{theorem}[Chain Rule]
+Let $f: A \to \RR$ and $g: B \to \RR$ satisfy $f(A) \subset B$ so that composition $g \circ f$ is well-defined. If $f$ is differentiable at $c \in A$ and g is differentiable at $f(c) \in B$, then $g \circ f$ is differentiable at $c$ with 
+\[ (g\circ f)'(x) = g'(f(c))\cdot f'(c). \]
+\end{theorem}
+
+All of these should be familiar from Calculus. 
+
+\begin{remark*}
+Another way to compute the derivative at $x = c$ is 
+\[ \lim_{x\to c} \dfrac{f(x) - f(c)}{x - c}. \] 
+\end{remark*}
+
+\section{The Mean Value Theorem}
+We state a few theorems first:
+
+\begin{theorem}[Interior Extremum Theorem]
+Suppose that $f$ is continuous on $(a,b)$, differentiable at some $c \in (a,b)$, and attains a local minimum or maximum at $c$. Then $f'(c) = 0$. 
+\end{theorem}
+\begin{proof}
+We present the proof for the maximum case. Since $c \in (a,b)$, we can construct a sequence $\{x_n\} \to c$ such that $x_n < c$ for all $n \in \NN$. Then 
+\[ f'(c) = \lim_{n\to \infty} \dfrac{f(x_n) - f(c)}{x_n - c}, \] where the numerator must be less than or equal to 0 and the denominator must be less than 0. Similarly, we can construct a sequence $\{y_n\} \to c$ so that $y_n > c$ for all $n \in \NN$, where the numerator will be less than or equal to zero and the denominator must be greater than 0:
+\[ f'(c) = \lim_{n\to\infty} \dfrac{f(y_n) - f(c)}{y_n - c}. \] Since the above two limits imply that $f'(c) \geq 0$ and $f'(c) \leq 0$ respectively, $f'(c) = 0$. 
+\end{proof}
+
+\begin{theorem}[Darboux's Theorem]
+If $f$ is differentiable on an interval $[a,b]$ and there is som $\alpha$ such that $f'(a) < \alpha < f'(b)$, then there exists some $c \in (a,b)$ such that $f'(c) = \alpha$. 
+\end{theorem}
+\begin{proof}
+Let $g(x) = f(x) - \alpha x$. Since $[a,b]$ is closed and bounded, and $g$ is continuous, $g$ attains its extrema. Note that $g'(a) = f'(a) - \alpha < 0$ and $g'(b) = f'(b) - \alpha > 0$, $g$ attains an interior minimum at $x = c$. Then $g'(c) = 0 \longrightarrow f'(c) - \alpha = 0 \longrightarrow f'(c) = \alpha$, as desired. 
+\end{proof}
+
+\begin{theorem}[Rolle's Theorem]
+Assume $f$ is continuous on $[a,b]$, differentiable on $(a,b)$, and $f(a) = f(b)$. Then there exists some $c \in (a,b)$ such that $f'(c) = 0$. 
+\end{theorem}
+\begin{proof}
+Suppose $f(x) = k$ for all $x \in [a,b]$, then for all $c \in (a,b)$, 
+\[ f'(c) = \lim_{h\to 0} \dfrac{f(c + h) - f(c)}{h} = \lim_{h\to 0} \dfrac{k-k}{h} = 0. \] 
+If $f(x)$ is a nonconstant function, then wlog there exists a point $x \in (a,b)$ with $f(x) > f(a)$. Then since $f$ is continuous on $[a,b]$., $f$ must attain a maximum value, which cannot happen at $x = a,b$. Then $f$ must achieve an interior maximum at some $c \in (a,b)$. By the Interior Extremum Theorem, $f'(c) = 0$. 
+\end{proof}
+\newpage
+\begin{theorem}[Mean Value Theorem]
+If $f$ is continuous on $[a,b]$, and differentiable on $(a,b)$, there exists a $c \in (a,b)$ such that 
+\[ f'(c) = \dfrac{f(b) - f(a)}{b-a}. \]
+\end{theorem}
+\begin{proof}
+Note that $\dfrac{f(b) - f(a)}{b-a}$ computes the slope of the secant line through points $a$ and $b$. If $f(a) = f(b)$, then the result immediately follows from Rolle's theorem. Suppose $f(a) \neq f(b)$. Construct $d(x)$ such that 
+\[ d(x) = f(x) - \left (\dfrac{f(b) - f(a)}{b - a}(x-a) + f(a) \right). \]
+Note $d(a) = f(a) - \dfrac{f(b) - f(a)}{b - a}(a-a) - f(a) = 0$, and similarly $d(b) = 0$. Since $d(x)$ is a differentiable function, there exists a $c \in (a,b)$ such that $d'(c) = 0$ by Rolle's Theorem. Since we have 
+\[ d'(x) = f'(x) - \dfrac{f(b) - f(a)}{b - a}, \] we have \[ f'(c) = \dfrac{f(b) - f(a)}{b - a}. \]
+\end{proof}
+This is actually a special case of the \vocab{General Mean Value Theorem}: 
+\begin{theorem}[General Mean Value Theorem]
+Let $f$ and $g$ be continuous functions on $[a,b]$ which are differentiable on $(a,b)$. Then there is a point $c \in (a,b)$ such that 
+\[ (f(b) - f(a))g'(c) = (g(b) - g(a))f'(c). \] 
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+We can prove the Mean Value Theorem by letting $g(x) = x$ in the above theorem. 
+\section{The Fundamental Theorem of Calculus}
+This theorem relates integration to differentiation; it links both of the main 'components' of calculus.
+
+\begin{theorem}[Fundamental Theorem of Calculus]
+We have two statements:
+\begin{enumerate}
+\item If $f \in C([a,b])$, and \[ g(x) = \int_a^x f(t) \diff t, \] then $g$ is differentiable at each $x \in (a,b)$ and $g'(x) = f(x)$. 
+\item If $G$ is differentiable and $G'(x) = g(x)$ is continuous on $[a,b]$, then 
+\[ G(b) - G(a) = \int_a^b g(t) \diff t. \]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+We prove both statements. 
+\begin{enumerate}
+\item 
+Note that 
+\[ \dfrac{g(x+h) - g(x)}{h} = \dfrac{1}{h}\int_x^{x+h} f(t) \diff t. \] Since $f$ is a continuous function, for any $\varepsilon > 0$ there exists a $\delta > 0$ such that $|t-x|<\delta$ implies that $|f(t) - f(x)| \leq \varepsilon$. As $h$ appraoches 0, we have 
+\[ \left | \dfrac{g(x+h) - g(x)}{h} - f(x) \right | = \left |\dfrac{1}{h}\int_x^{x+h} f(t) \diff t- \dfrac{1}{h}f(x)(x+h-x) \right | =  \dfrac{1}{|h|}\varepsilon \left | \int_x^{x+h} 1 \diff t \right |= \varepsilon. \]
+Thus $g'(x)$ is defined, and equals $f(x)$. 
+
+\item 
+Define 
+\[ f(x) = \int_a^x G'(t) \diff t. \] Note that $f(a) = 0$. From the first part of this theorem, $f'(x) = G'(x)$. Define $h(x) = f(x) - G(x)$, so that $h'(x) = 0 \Rightarrow h(x) = k$ for some constant $k$. Since $h(a) = f(a) - G(a) = -G(a)$, we have $-G(a) = f(x) - G(x)$ for all $x \in [a,b]$. Thus \[f(x) = G(x) - G(a) \longrightarrow f(b) = \displaystyle \int_a^bG'(t) \diff t = \int_a^b g(t) \diff t = G(b) - G(a). \]
+\end{enumerate}
+\end{proof}
+
+\begin{corollary*}
+All continuous functions have antiderivatives. 
+\end{corollary*}
+Even though we cannot always express these antiderivatives in terms of elementary functions, they still exist. (A rather well known example of this is $f(t) = e^{t^2}$)
+
+\begin{remark*}
+Assuming $f$ is continuous, then we have 
+\[ \dfrac{\diff }{\diff x} \left ( \int_a^x f(t) \diff t \right ) = f(x), \]
+and that 
+\[ \int_a^x \left ( \dfrac{\diff}{\diff t} f(t)\right ) \diff t = f(x) - f(a). \]
+Differentiation and integration are inverse processes. 
+\end{remark*}
+
+\section{Derivatives of Inverse Functions}
+Suppose $f$ is a monotone function. If $f(x_1) < f(x_2) \Leftrightarrow x_1 < x_2$, then $f$ must be bijective, and is an \vocab{invertible} map between $\Dom{f}$ and $\Ran{f}$, or $\exists f^{-1}: \Ran{f} \to \Dom{f}$.  
+
+\begin{theorem}
+Suppose $f$ is a strictly monotone function on $[a,b]$. If $\Ran{f}$ is an interval, then $f$ is continuous. 
+\end{theorem}
+\begin{proof}
+WLOG let $f$ be strictly increasing. Choose any $c \in (a,b)$ and let $\varepsilon>0$. Let $y_1 = \max{f(c) - \varepsilon, f(a)}$ and $y_2 = \min{f(c) + \varepsilon, f(b)}$. Note that \[ f(a) \leq y_1 < f(c) < y_2 \leq f(b). \] Note that $\Ran{f} = [f(a), f(b)]$, we have $y_1, y_2 \in \Ran{f}$. Choose $x_1, x_2 \in [a,b]$ such that $f(x_1) = y_1$ and $f(x_2) = y_2$. Note that $x_1 < c < x_2$ because $f$ is monotonic. Let $\delta = \min{|x_1 - c|, |x_2 - c|}$. Note that $|x-c| \leq \delta$ implies $x_1 \leq x \leq x_2$. Then we may write
+\[ y_1 \leq f(x) \leq y_2 \Leftrightarrow f(c) - \varepsilon \leq f(x) \leq f(x) + \varepsilon \Leftrightarrow -\varepsilon \leq f(x) \leq \varepsilon .\] Thus $|x-c| \leq \delta$ implies $|f(x) - f(c)| \leq \varepsilon$, and $f$ is continuous for any $c \in (a,b)$. The proofs are similar for $x = a,b$. Thus $f$ is continuous. 
+\end{proof}
+
+\begin{theorem}
+Suppose $f$ is a strictly monotone function on $[a,b]$. If $f$ is continuous, then so is $f^{-1}$. 
+\end{theorem}
+\begin{proof}
+WLOG, suppose $f$ is increasing. Since $f$ is strictly monotone, the inverse exists. We have $f^{-1}: [f(a), f(b)] \longrightarrow [a,b]$, so $\Ran{f}$ is an interval. Choose any $y_1 < y_2$ in $\Ran{f}$. Then $f^{-1}(y_1) < f^{-1}(y_2)$, so $f^{-1}$ is a strictly monotone increasing, and must be continuous. 
+\end{proof}
+
+The next theorem shows the derivative of the inverse in terms of the inverse. There's a common proof that's wrong using the chain rule which doesn't work because it assumes $f^{-1}$ is differentiable. 
+\begin{theorem}
+Suppose $f$ is a strictly monotone function on $[a,b]$. If $f$ is differentiable at $x_0$ and $f'(x_0) \neq 0$, then $f^{-1}$ is differentiable at $y_0 = f(x_0)$, and 
+\[ (f^{-1})'(y_0) = \dfrac{1}{f'(x_0)}. \]
+\end{theorem}
+\begin{proof}
+Let $\{y_n\} \to y_0$, where $y_n = f^{-1}(x_n)$ for some $\{x_n\}\to x_0$. Then we have 
+\[ \lim_{n\to \infty} \dfrac{f^{-1}(y_n) - f^{-1}(y_0)}{y_n - y_0} = \lim_{n\to\infty} \dfrac{x_n - x_0}{f(x_n) - f(x_0)} = \lim_{n\to\infty} \dfrac{1}{\dfrac{f(x_n) - f(x_0)}{x_n - x_0}} = \dfrac{1}{f'(x_0)}. \]
+\end{proof}
+
+

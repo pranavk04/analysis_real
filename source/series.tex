@@ -1,0 +1,153 @@
+\chapter{Series}
+
+\section{Introduction}
+Recall that an \vocab{infinite series} is a sum 
+\[ \sum_{j=1}^\infty a_j \] for some $a_j$, and the $n$th \vocab{partial sum} 
+\[ S_n = \sum_{j=1}^n a_j. \] 
+\begin{definition}
+Let $\{a_j\}$ be a sequence of real numbers, and consider the partial sums $S_n$ for all $n \in \NN$. If the sequence of partial sums $\{S_n\}$ converges to an $S \in \RR$ as $n \to \infty$, then the series 
+\[ \sum_{j=1}^\infty \] converges, and we define 
+\[ S = \sum_{j=1}^\infty. \] 
+\end{definition}
+Let's look at an example. 
+\begin{example}
+Consider $a_j = \left (\dfrac{1}{10} \right )^j$. This converges to $0.\ol{1} = \dfrac{1}{9}$ as $n \to \infty$. 
+\end{example}
+
+Next we define the notion of a geometric series. 
+\begin{definition}
+Let $\alpha \in \RR$. Then the series $\sum\limits_{j=k}^\infty \alpha^j$ is called a \vocab{geometric series}, which converges if $|\alpha|<1$ to 
+\[ \sum_{j=k}^\infty \alpha^j = \dfrac{\alpha^k}{1-\alpha}. \] 
+\end{definition}
+This is easily proved by looking at the partial sum $S_n$. 
+Now we establish the notion of convergence for series. 
+\newpage 
+\begin{theorem}
+	Let $\{a_j\}$ be a sequence of real numbers. Then we have the following: 
+	\begin{enumerate}
+		\item $\sum\limits_{j=1}^\infty a_j$ converges iff for all $\varepsilon > 0$ there exists an $N \in \NN$ so that 
+			\[ \left | \sum_{j=n}^m a_j \right | \leq \varepsilon \] for all $m \geq n \geq N$. 
+		\item $\sum\limits_{j=1}^\infty a_j$ converges iff $\{a_j\} \to 0$. 
+		\item If $\sum\limits_{j=1}^\infty |a_j|$ converges, $\sum\limits_{j=1}^\infty a_j$ converges as well. 
+		\item If $\sum a_j$ and $\sum b_j$ converge, then $\sum (ca_j + db_j)$ converges to $c\sum a_j + d\sum b_j$ for all $c, d \in \RR$. 
+	\end{enumerate}
+\end{theorem}
+
+\section{Convergence Tests}
+Recall from calculus that there are various 'convergence tests' to check whether a series converges. 
+
+\begin{theorem}[Comparison Test]
+	Suppose $\{a_j\}$, $\{b_j\}$, and $\{c_j\}$ are \emph{nonnegative} sequences with $a_j \leq b_j \leq c_j$ for all $j \in \NN$. Then we have the following: 
+	\begin{enumerate}
+		\item If $\sum c_j$ is convergent, then $\sum b_j$ converges. 
+		\item If $\sum a_j$ diverges, then $\sum b_j$ converges. 
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	We offer the proof for (1). Since we have $0 \leq b_j \leq c_j$ for all $j$, and $\sum c_j$ converges, let $\varepsilon > 0$ and choose $N \in \NN$ such that if $m \geq n \geq N$, 
+	\[ \left | \sum\limits_{j=n}^m c_j \right | \leq \varepsilon. \] Then we have 
+	\[ \left | \sum_{j=n}^m b_j \right | \leq \left | \sum_{j=n}^m c_j \right | \leq \varepsilon, \] so $\sum b_j$ is Cauchy, and thus converges. The proof is similar for (2). 
+\end{proof}
+
+\begin{theorem}[Limit Comparison Test]
+	Suppose $\{a_j\}$ and $\{b_j\}$ are \emph{nonnegative} sequences with $b_j >0$. If 
+	\[ \lim\limits_{j \to \infty} \dfrac{a_j}{b_j} = L \] for some $L \in (0, \infty)$, then both $a_j$ and $b_j$ either both diverge or both converge. 
+\end{theorem}
+\begin{proof}
+	Since the limit equals some $L$, there exists an $N \in \NN$ large enough so that for all $j \geq N$, we have 
+	\[ -\frac{L}{2} \leq \frac{a_j}{b_j} - L \leq \frac{L}{2} \Longleftrightarrow \frac{L}{2} b_j \leq a_j \leq \frac{3L}{2} b_j.\] If $\sum b_j$ converges, then $a_j \leq \frac{3L}{2} b_j$ also converges. If $\sum b_j$ diverges, then $\frac{L}{2} b_j \leq a_j$, so $\sum a_j$ also diverges. 
+\end{proof}
+
+\begin{theorem}[Integral Test]
+	Suppose $f(x)$ is continuous, positive, and monotone decreasing on $[K, \infty)$, and $f(j) = a_j$ for all $j \in \NN$. Then 
+	\[ \int_K^\infty f(x) \diff x \text{ and } \sum_{j=K}^\infty a_j \] either both converge or both diverge. 
+\end{theorem}
+A rather 'famous' example of this is the $p$-test for series of the form $\sum \frac{1}{x^p}$, where the series is convergent iff $p > 1$.When $p=1$, we get the famously divergent \vocab{Harmonic Series}. 
+
+\begin{theorem}[Alternating Series Test]
+	Suppose $a_j$ is a monotone decreasing sequence of nonnegative numbers. If $a_j \to 0$, then 
+	\[ \sum_{j=1}^\infty (-1)^ja_j \] converges. 
+\end{theorem}
+This proof is done by noting that by the Nested Interval Property, the intersection of the partial sums is not empty, and the $a_j \to 0$ (the 'widths' of the intervals) meaning that the intersection of the intervals is a single element $S$, and that $S_n \to S$, meaning the series as a whole is convergent. 
+
+We list the last two tests without discussion. 
+\begin{theorem}[Root Test]
+	Let $L = \lim\limits_{j \to \infty} |a_j|^{\frac{1}{j}}$. 
+	\begin{enumerate}
+		\item If $L <1$, the series is \vocab{absolutely convergent}, meaning that $\sum |a_j|$ converging $\rightarrow \sum a_j$ converges. 
+		\item If $L > 1$, the series is divergent. 
+		\item If $L = 1$, the series is inconclusive. 
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Ratio Test]
+	Let $L = \lim\limits_{j\to \infty} \left |\dfrac{a_{j+1}}{a_j} \right |$. Then the conditions for convergence and divergence are the same as the Root Test. 
+\end{theorem}
+
+Note that pointwise and uniform convergence refer to $f_n \to f$ on $E \subset \RR$, while \vocab{conditionally convergent} ($\sum a_j$ cocnverges but $\sum |a_j|$ does not) and absolute convergence refer to series of real numbers. 
+
+\newpage
+
+ \section{The Weierstrass M-Test}
+Note that the partial sums of a series $S_n$ form a sequence of functions. 
+\begin{definition}[Convergence of a Series]
+	For each $j \in \NN$, let $f_j(x)$ and $f$ be functions defined on a set $E \subset \RR^n$. The infinite series 
+	\[ \sum\limits_{j=1}^\infty f_j(x) \] converges pointwise / uniformly on $E$ to $f(x)$ if the sequence $S_n(x)$ converges pointwise / uniformly to $f(x)$. 
+\end{definition}
+Let's look at an example 
+\begin{example}
+Does $\sum\limits_{j=1}^\infty x_j$ converge? In what manner?
+\end{example}
+\begin{sol}
+For any $x \in E$, we have $\sum\limits_{j=1}^\infty x^j = \dfrac{x}{1-x}$ as $|x| < 1$ $\forall x$. The $n$th partial sum $S_n(x) = \dfrac{x-x^{n+1}}{1-x}$. On $E$, this convergence is not uniform: 
+\[ S_n(x) - f(x)| = \dfrac{|x|^{n+1}}{1-x}, \]  and as $x \to 1^-$ the denominator converges to 0. Consider any interval $[-a, a] \subset E$. Then $|S_n(x) - f(x)| = \dfrac{a^{n+1}}{1-a}$, which converges to 0. Since this is independent of $x$, we have $S_n \to f$ uniformly on $[-a, a]$. 
+\end{sol}
+
+We can also interchange the continuity and summation:
+\begin{theorem}[Interchange of continuity and $\sum$]
+Let $f_j(x)$ be continuous functions on $E \subset \RR$. Suppose $\sum\limits_{j=1}^\infty f_j(x)$ converges uniformly on $E$ to $f$. Then $f$ is continuous on $E$. 
+\end{theorem}
+\begin{proof}
+Note that if $f_n$ are continuous, then the partial sums $S_n$ are continuous as well. $\{S_n\} \to f$ uniformly, as the series converges uniformly on $E$, meaning $f$ is continuous by the Uniform Limit Theorem. 
+\end{proof}
+
+\begin{theorem}[Cauchy Criterion for Uniform Convergence of a Series]
+A series $\sum\limits_{j=1}^\infty f_j(x)$ converges unformly on $E \subset \RR$ if and only i for evey $\varepsilon > 0$ there exists an $N \in \NN$ such that for all $m \geq n \geq N$, 
+\[ |f_{n+1}(x) + \cdots + f_m(x)| \leq \varepsilon \] for all $x \in E$. 
+\end{theorem}
+\begin{proof}
+insert later 
+\end{proof}
+\newpage
+Now for the big theorem of this section!
+\begin{theorem}[The Weierstrass M Test]
+For each $j \in \NN$, let $f_j(x)$ be a function defined on a set $E \subset \RR$, and let $M_j \in \RR$ such that $M_j > 0$ and for all $x \in E$, 
+\[ |f_j(x)| \leq M_j. \] Then if $\sum\limits_{j=1}^\infty M_j$ converges, $\sum\limits_{j=1}^\infty f_j(x)$ converges uniformly on $E \subset \RR$. 
+\end{theorem}
+\begin{proof}
+Let $\varepsilon > 0$. Since $\sum M_j$ is a convergent series, there exists an $N \in \NN$ such that for $m \geq n \geq N$, we have \[ \left | \sum_{j=n+1}^m M_j \right | \leq \varepsilon. \] Since $|f_j(x)| \leq M_j$ for all $x \in E$, for any such $m \geq n \geq N$, we have 
+\[ \left | \sum_{j=n+1}^m f_j(x) \right | \leq |f_{n+1}(x)| + \cdots + |f_m(x)| \leq \sum_{j=n+1}^m M_j \leq \varepsilon, \] and we are done. 
+\end{proof}
+
+\begin{theorem}[Interchange of $\int$ and $\sum$]
+Let $f_j(x)$ be integrable functions on $[a,b]$ and suppose $\sum f_j(x)$ converges uniformly on $[a,b]$ to a function $f$. Then $f$ is integrable on $[a,b]$, and 
+\[ \int_a^x \sum_{j=1}^\infty f_j(t) \diff t = \int_a^x f(t) \diff t = \sum_{j=1}^\infty \int_a^x f_j(t) \diff t. \]
+\end{theorem}
+\begin{proof}
+Since $f_j(x)$ is integrable for all $j$, each partial sum is also integrable. Since the partial sums converge uniformly to $f$ on $[a,b]$, $f$ is also integrable. Let $\varepsilon > 0$, and choose $N \in \NN$ such that 
+\[ \left | \sum_{j=1}^n f_j(x) - f(x) \right | \leq \dfrac{\varepsilon}{b-a}, \] for all $x \in [a,b]$ and $n \geq N$. Then when $n \geq N$, we have 
+\[ \left | \int_a^x f(t) \diff t - \sum_{j=1}^n \int_a^x f(t) \diff t \right | = \left | \int_a^x f(t) - \sum_{j=1}^n f_j(t) \diff t \right | \leq \int_a^x \left |f(t) - \sum_{j=1}^n f_j(t) \right | \diff t \leq \int_a^x \dfrac{\varepsilon}{b-a} \diff t \leq \varepsilon, \] as desired. 
+\end{proof}
+\newpage
+\begin{theorem}
+Let $f_j(x)$ be differentiable functions defined on an interval $E \subset \RR$, and assume that $\sum\limits_{j=1}^\infty f'_j(x)$ converges uniformly to $g(x)$ on $E$. If there exists an $x_0 \in [a,b]$ where $\sum\limits_{j=1}^\infty f_j(x_0)$ converges, then $\sum\limits_{j=1}^\infty f_j(x)$ converges uniformly to a differentiable function $f(x)$ such that $f'(x) = g(x)$ on $E$. Then we have 
+\[ f(x) = \sum_{j=1}^\infty f_j(x) \text{, and } f'(x) = \sum_{j=1}^\infty f'_j(x). \] 
+\end{theorem}
+Note that this essentially states that if the above are satisfied, then $\dfrac{\diff}{\diff x} \left ( \displaystyle\sum_{j=1}^\infty f_j(x) \right ) = \displaystyle\sum_{j=1}^\infty \dfrac{\diff}{\diff x} f_j(x)$. 
+
+
+\section{Test Section}
+This is a test section on new keyboard. Supose we have a set $S$ such that $\forall x \in S$ there exists a value $y \in S^c$ such that $x+y = 0$. If $1 \in S$, find $S$. 
+\begin{sol}
+We claim $S = \mathbb{R}^+$ or $\mathbb{R}^-$. Clearly, if $x \in S$, then $y = -x$ must be in $S^c$. Note that 0 cannot be in $S$, as then $0 \in S^c$, which is a contradiction. We also have $|S^c| > |S|$, as $S^c$ must contain 0. Now we can also show that $S^c = \mathbb{R}_{\geq 0}$ or $\mathbb{R}_{\leq 0}$. 
+\end{sol}<++>
